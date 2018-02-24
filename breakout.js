@@ -19,6 +19,12 @@ ctx.strokeStyle = "rgba(0, 0, 255, 0.5)";
 ctx.stroke();
 ctx.closePath();
 
+ctx.beginPath();
+ctx.rect(460, 300, 10, 10);
+ctx.fillStyle = "yellow";
+ctx.fill();
+ctx.closePath();
+
 
 
 
