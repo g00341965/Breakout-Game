@@ -11,6 +11,7 @@ var y = canvas.height-30;
 var dx= 2;
 var dy= -2;
 
+
 var ballRadius = 10;
 
 //Draw the ball 
@@ -29,7 +30,15 @@ function draw() {
 	drawBall();
 	x += dx;
 	y += dy;
-}
 
+	if(y + dy > canvas.height-ballRadius || y + dy < ballRadius) {
+		dy = -dy;
+	}
+
+	if(x + dx > canvas.width-ballRadius || x + dx < ballRadius) {
+		dx = -dx;
+	}
+
+}
 
 setInterval(draw, 10);
