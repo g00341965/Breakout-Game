@@ -22,8 +22,8 @@ var rightPressed = false;
 var leftPressed = false;
 
 //Setup some bricks 
-var brickRowCount = 3;
-var brickColumnCount = 5;
+var brickRowCount = 2;
+var brickColumnCount = 3;
 var brickWidth = 75; 
 var brickHeight = 20;
 var brickPadding = 10;
