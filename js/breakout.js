@@ -22,8 +22,8 @@ var rightPressed = false;
 var leftPressed = false;
 
 //Setup some bricks 
-var brickRowCount = 2;
-var brickColumnCount = 3;
+var brickRowCount = 3;
+var brickColumnCount = 5;
 var brickWidth = 75; 
 var brickHeight = 20;
 var brickPadding = 10;
@@ -80,6 +80,7 @@ function draw() {
 	drawPaddle();
 	drawBall();
 	drawBricks();
+	collisonDetection();
 	
 	
 	x += dx;
@@ -136,5 +137,16 @@ function keyUpHandler(e){
 }
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);	
+
+function collisonDetection(){
+	for(c = 0; c < brickColumnCount; c++){
+		for(r = 0; r < brickRowCount; r++){
+			var b = bricks[c][r];
+			if(x > b.x && x < b.x + brickWidth && y > b.y && y < b.y + brickHeight){
+				dy = -dy;
+			}
+		}
+	}
+}
 	
 setInterval(draw, 10);
