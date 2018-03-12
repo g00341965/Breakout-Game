@@ -153,6 +153,11 @@ function collisonDetection(){
 					dy = -dy;
 					b.status = 0;
 					score = score + 10;
+					if(score == brickRowCount+brickColumnCount){
+						alert("you WIN, CONGRATULATIONS!");
+						document.location.relaod();
+					
+					}	
 				
 				}
 			}
