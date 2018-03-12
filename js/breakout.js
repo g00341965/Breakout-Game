@@ -30,6 +30,8 @@ var brickPadding = 10;
 var brickOffsetTop = 30;
 var brickOffsetLeft = 30;
 
+var score = 0;
+
 //Hold the bricks in a tow-dimensional array - thin of it as rows and columns
 var bricks = [];
 for(c = 0; c < brickColumnCount; c++){
@@ -80,6 +82,7 @@ function drawPaddle(){
 function draw() {
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 	drawPaddle();
+	drawScore();
 	drawBall();
 	drawBricks();
 	collisonDetection();
@@ -103,6 +106,7 @@ function draw() {
 			dy = -dy;
 		}
 		else {
+			dy = -dy
 			alert("GAME OVER");
 			document.location.reload();
 		}
@@ -146,12 +150,22 @@ function collisonDetection(){
 			var b = bricks[c][r];
 			if(b.status == 1){
 				if(x > b.x && x < b.x + brickWidth && y > b.y && y < b.y + brickHeight){
-				dy = -dy;
-				b.status = 0;
+					dy = -dy;
+					b.status = 0;
+					score++;
+				
 				}
 			}
 		}
 	}
 }
+
+function drawScore(){
+	ctx.font = "16px Arial";
+	ctx.fillStyle = "#0095DD";
+	ctx.fillText("Score: "+score, 8, 20);
+	document.getElementById("gamescore").innerHTML = "Score: " + score;
+}
+
 	
 setInterval(draw, 10);
