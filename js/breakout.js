@@ -46,6 +46,9 @@ var WINNING_SOUND = new Audio('sounds/woohoo.wav');
 var SCORE_SOUND = new Audio('sounds/success.wav');
 var GAMEOVER_SOUND = new Audio('sounds/gameover.wav');
 
+
+
+
 //This function draws the bricks 
 function drawBricks(){
 	for( c = 0; c < brickColumnCount; c++){
@@ -146,6 +149,17 @@ function keyUpHandler(e){
 	}
 	
 }
+
+function mouseMoveHandler(e){
+	var relativeX = e.clientX - canvas.offsetLeft;
+	if(relativeX > 0 && relativeX < canvas.width){
+		paddleX = relativeX - paddleWidth/2;
+	}
+}
+
+
+
+document.addEventListener("mousemove", mouseMoveHandler, false);
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);	
 
