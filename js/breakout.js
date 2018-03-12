@@ -41,6 +41,10 @@ for(c = 0; c < brickColumnCount; c++){
 	}
 }
 
+//Game sounds
+var WINNING_SOUND = new Audio('sounds/woohoo.wav');
+var SCORE_SOUND = new Audio('sounds/success.wav');
+var GAMEOVER_SOUND = new Audio('sounds/gameover.wav');
 
 //This function draws the bricks 
 function drawBricks(){
@@ -107,6 +111,7 @@ function draw() {
 		}
 		else {
 			dy = -dy
+			GAMEOVER_SOUND.play();
 			alert("GAME OVER");
 			document.location.reload();
 		}
@@ -153,7 +158,9 @@ function collisonDetection(){
 					dy = -dy;
 					b.status = 0;
 					score = score + 10;
+					SCORE_SOUND.play();
 					if(score == brickRowCount+brickColumnCount){
+						WINNING_SOUND.play();
 						alert("you WIN, CONGRATULATIONS!");
 						document.location.relaod();
 					
