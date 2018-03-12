@@ -32,7 +32,7 @@ var brickOffsetLeft = 30;
 
 var score = 0;
 
-//Hold the bricks in a tow-dimensional array - thin of it as rows and columns
+//Hold the bricks in a two-dimensional array - thin of it as rows and columns
 var bricks = [];
 for(c = 0; c < brickColumnCount; c++){
 	bricks[c] = [];
@@ -152,7 +152,7 @@ function collisonDetection(){
 				if(x > b.x && x < b.x + brickWidth && y > b.y && y < b.y + brickHeight){
 					dy = -dy;
 					b.status = 0;
-					score++;
+					score = score + 10;
 				
 				}
 			}
