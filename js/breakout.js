@@ -22,8 +22,8 @@ var rightPressed = false;
 var leftPressed = false;
 
 //Setup some bricks 
-var brickRowCount = 3;
-var brickColumnCount = 5;
+var brickRowCount = 5;
+var brickColumnCount = 7;
 var brickWidth = 75; 
 var brickHeight = 20;
 var brickPadding = 10;
@@ -31,6 +31,7 @@ var brickOffsetTop = 30;
 var brickOffsetLeft = 30;
 
 var score = 0;
+var lives = 3;
 
 //Hold the bricks in a two-dimensional array - thin of it as rows and columns
 var bricks = [];
@@ -90,9 +91,11 @@ function draw() {
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 	drawPaddle();
 	drawScore();
+	drawLives();
 	drawBall();
 	drawBricks();
 	collisonDetection();
+	
 	
 	
 	x += dx;
@@ -114,9 +117,19 @@ function draw() {
 		}
 		else {
 			dy = -dy
-			GAMEOVER_SOUND.play();
-			alert("GAME OVER");
-			document.location.reload();
+			lives--;
+			if(!lives){
+				GAMEOVER_SOUND.play();
+				alert("GAME OVER");
+				document.location.reload();
+			}
+			else {
+				x = canvas.width/2;
+				y = canvas.height-30;
+				dx = 2;
+				dy = -2;
+				paddleX = (canvas.width-paddleWidth)/2;
+			}
 		}
 	}
 		
@@ -171,11 +184,11 @@ function collisonDetection(){
 				if(x > b.x && x < b.x + brickWidth && y > b.y && y < b.y + brickHeight){
 					dy = -dy;
 					b.status = 0;
-					score = score + 10;
+					score++;
 					SCORE_SOUND.play();
-					if(score == brickRowCount+brickColumnCount){
+					if(score == brickRowCount*brickColumnCount){
 						WINNING_SOUND.play();
-						alert("you WIN, CONGRATULATIONS!");
+						alert("YOU WIN, CONGRATULATIONS!");
 						document.location.relaod();
 					
 					}	
@@ -191,6 +204,13 @@ function drawScore(){
 	ctx.fillStyle = "#0095DD";
 	ctx.fillText("Score: "+score, 8, 20);
 	document.getElementById("gamescore").innerHTML = "Score: " + score;
+}
+
+function drawLives(){
+	ctx.font = "16px Arial";
+	ctx.fillStyle = "#0095DD";
+	ctx.fillText("Lives: " + lives, canvas.width-65, 20);
+	document.getElementById("gamelives").innerHTML = "Lives: " + lives;
 }
 
 	
